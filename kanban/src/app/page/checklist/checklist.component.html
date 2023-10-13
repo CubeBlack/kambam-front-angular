@@ -1,13 +1,11 @@
 <h1>Project check list</h1>
 
-
-
-  <div *ngFor="let card of cards">
-    <h3>{{card.project}}</h3>
-    <h4>{{card.group}}</h4>
-    <h5>{{card.title}}</h5>
-    <div>{{card.description}}</div>
-
-
-   
+<div *ngFor="let item of itens;">
+  <div class="project" *ngIf="item.project_visible">{{item.project}}</div>
+  <div class="group" *ngIf="item.group_visible">{{item.group}}</div>
+  <div class="title">
+    <span class="status">{{item.status}}</span>
+    {{item.title}}
   </div>
+  <div class="description">{{item.description}}</div>
+</div>

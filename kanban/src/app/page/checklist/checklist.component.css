@@ -1,0 +1,22 @@
+.project{
+
+}
+.group{
+    margin-left: 20px;
+}
+
+.status{
+    display: inline-block;
+    border: 1px solid gray;
+    padding: 3px;
+}
+.title{
+    color: blue;
+    margin-left: 40px;
+}
+
+.description{
+    margin-left: 80px;
+    margin-bottom: 10px;
+    color: gray;
+}
