@@ -111,7 +111,9 @@ export class ChecklistComponent {
   }
 
   update_item(item: Item) {
-    console.log(item);
+    this.cardService.updateCard(this.item_to_card(item)).subscribe(()=>{
+      this.getCards();
+    });
   }
 
   get_element_text_by_envet(event: Event):string{
@@ -128,4 +130,8 @@ export class ChecklistComponent {
     
   }
 
+  set_title_by_event_and_save(event: Event, item:Item):void{
+    item.title = this.get_element_text_by_envet(event);
+    this.update_item(item);
+  }
 }

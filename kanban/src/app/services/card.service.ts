@@ -9,6 +9,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class CardService {
   private cards_api_url = 'http://localhost:8000/api/cards';
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +30,17 @@ export class CardService {
     return this.http.post<Card>(this.cards_api_url, card);
   }
 
+  updateCard(card:Card){
+    return this.http.put(this.cards_api_url+'/'+card.id, card, this.httpOptions).pipe(
+      tap(_ => this.log(`updated card id=${card.id}`)),
+      catchError(this.handleError<any>('updateCard'))
+    );
+  }
+
+  log(msg:string){
+
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
@@ -41,5 +55,7 @@ export class CardService {
       return of(result as T);
     };
   }
+
+  
 
 }
