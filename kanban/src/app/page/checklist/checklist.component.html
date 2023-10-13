@@ -7,16 +7,16 @@
 
   <div class="hierarchical_level_0">
     <Label>Projeto: </Label>
-    <span contenteditable class="project">{{novo_card.project}}</span>
+    <span contenteditable class="project" (blur)="novo_card.project=get_element_text_by_envet($event)" >{{novo_card.project}}</span>
   </div>
 
   <div class="hierarchical_level_1">
-    <Label>Grupo: </Label>
-    <span class="group" contenteditable>{{novo_card.group}}</span>
+    <Label>Group: </Label>
+    <span class="group" contenteditable (blur)="novo_card.group=get_element_text_by_envet($event)">{{novo_card.group}}</span>
   </div>
 
   <div class="hierarchical_level_2">
-    <select name="" id="" class="status">
+    <select name="" id="" class="status" (blur)="novo_card.status=get_element_value_by_envet($event)">
       <option *ngFor="let opt of status_options" [value]="opt.key" [selected]="false">
         {{opt.value}}
       </option>
@@ -24,13 +24,13 @@
     </select>
     <span class="title">
       <label for="">Title: </label>
-      <span contenteditable>{{novo_card.title}}</span>
+      <span contenteditable (blur)="novo_card.title=get_element_text_by_envet($event)">{{novo_card.title}}</span>
     </span>
   </div>
 
   <div  class="hierarchical_level_3">
     <label for="">Description: </label>
-    <div class="description" contenteditable>{{novo_card.description}}</div>
+    <div class="description" contenteditable (blur)="novo_card.description=get_element_text_by_envet($event)">{{novo_card.description}}</div>
   </div>
   
   <button (click)="form_new_item_save()">Salvar</button>

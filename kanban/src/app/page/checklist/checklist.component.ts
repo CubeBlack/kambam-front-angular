@@ -54,6 +54,9 @@ export class ChecklistComponent {
 
   form_new_item_save() {
     this.set_new_item_hide();
+
+
+
     this.cardService.insertCard(this.novo_card)
       .subscribe((cards) => {
         this.getCards();
@@ -93,7 +96,6 @@ export class ChecklistComponent {
 
 
       this.itens.push(item);
-
     }
   }
 
@@ -112,6 +114,18 @@ export class ChecklistComponent {
     console.log(item);
   }
 
+  get_element_text_by_envet(event: Event):string{
+    const elemento = <Element>event.target;
+    const conteudo = elemento.innerHTML;
+    return conteudo;
+  }
 
+  get_element_value_by_envet(event: Event):string{
+    const elemento = <Element>event.target;
+    const conteudo = elemento.nodeValue;
+
+    return <string>conteudo;
+    
+  }
 
 }
