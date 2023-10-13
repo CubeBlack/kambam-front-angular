@@ -112,17 +112,17 @@ export class ChecklistComponent {
 
   update_item(item: Item) {
     this.cardService.updateCard(this.item_to_card(item)).subscribe(()=>{
-      this.getCards();
+      //
     });
   }
 
-  get_element_text_by_envet(event: Event):string{
+  get_element_text_by_event(event: Event):string{
     const elemento = <Element>event.target;
-    const conteudo = elemento.innerHTML;
+    const conteudo = <string>elemento.textContent;
     return conteudo;
   }
 
-  get_element_value_by_envet(event: Event):string{
+  get_element_value_by_event(event: Event):string{
     const elemento = <Element>event.target;
     const conteudo = elemento.nodeValue;
 
@@ -131,7 +131,17 @@ export class ChecklistComponent {
   }
 
   set_title_by_event_and_save(event: Event, item:Item):void{
-    item.title = this.get_element_text_by_envet(event);
+    item.title = this.get_element_text_by_event(event);
+    this.update_item(item);
+  }
+
+  set_description_by_event_and_save(event: Event, item:Item):void{
+    item.title = this.get_element_text_by_event(event);
+    this.update_item(item);
+  }
+
+  set_status_by_event_and_save(event: Event, item:Item){
+    item.status = this.get_element_value_by_event(event);
     this.update_item(item);
   }
 }
