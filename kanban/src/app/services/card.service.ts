@@ -14,28 +14,32 @@ export class CardService {
 
   getCards(): Observable<Card[]> {
     return this.http.get<Card[]>(this.cards_api_url)
-    .pipe(
-      catchError(this.handleError<Card[]>('getCards', []))
-    );
+      .pipe(
+        catchError(this.handleError<Card[]>('getCards', []))
+      );
   }
 
-  getCard(id:number): Observable<Card> {
-    return this.http.get<Card>(this.cards_api_url + '/'+id)
+  getCard(id: number): Observable<Card> {
+    return this.http.get<Card>(this.cards_api_url + '/' + id)
+  }
+
+  insertCard(card: Card): Observable<Card> {
+    return this.http.post<Card>(this.cards_api_url, card);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-  
+
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
-  
+
       // TODO: better job of transforming error for user consumption
       //this.log(`${operation} failed: ${error.message}`);
       console.log(`${operation} failed: ${error.message}`);
-  
+
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
-  
+
 }

@@ -1,11 +1,54 @@
 <h1>Checklist</h1>
+<div class="options">
+  <button *ngIf="!form_new_item_visible" (click)="set_new_item_visible()">Novo item</button>
+</div>
+
+<div *ngIf="form_new_item_visible" class="form_new_item">
+
+  <div class="hierarchical_level_0">
+    <Label>Projeto: </Label>
+    <span contenteditable class="project">{{novo_card.project}}</span>
+  </div>
+
+  <div class="hierarchical_level_1">
+    <Label>Grupo: </Label>
+    <span class="group" contenteditable>{{novo_card.group}}</span>
+  </div>
+
+  <div class="hierarchical_level_2">
+    <select name="" id="" class="status">
+      <option *ngFor="let opt of status_options" [value]="opt.key" [selected]="false">
+        {{opt.value}}
+      </option>
+
+    </select>
+    <span class="title">
+      <label for="">Title: </label>
+      <span contenteditable>{{novo_card.title}}</span>
+    </span>
+  </div>
+
+  <div  class="hierarchical_level_3">
+    <label for="">Description: </label>
+    <div class="description" contenteditable>{{novo_card.description}}</div>
+  </div>
+  
+  <button (click)="form_new_item_save()">Salvar</button>
+</div>
 
 <div *ngFor="let item of itens;">
-  <div class="project" *ngIf="item.project_visible">{{item.project}}</div>
-  <div class="group" *ngIf="item.group_visible">{{item.group}}</div>
-  <div class="title">
-    <span class="status">{{item.status}}</span>
-    {{item.title}}
+  <div class="hierarchical_level_0 project" *ngIf="item.project_visible">{{item.project}}</div>
+  
+  <div class="hierarchical_level_1 group" *ngIf="item.group_visible">{{item.group}}</div>
+  
+  <div class="hierarchical_level_2">
+    <select name="" id="" class="status">
+      <option *ngFor="let opt of status_options" [value]="opt.key" [selected]="item.status==opt.key">
+        {{opt.value}}
+      </option>
+    </select>
+
+    <span contenteditable class="title">{{item.title}}</span>
   </div>
-  <div class="description">{{item.description}}</div>
+  <div class="hierarchical_level_3 description" contenteditable (input)="update_item(item)">{{item.description}}</div>
 </div>

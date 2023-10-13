@@ -1,22 +1,56 @@
-.project{
-
+.form_new_item {
+    background-color: lightgreen;
+    padding: 5px;
+    display: block;
+    width: auto;
 }
-.group{
+
+.form_new_item [contenteditable]{
+    display: inline-block;
+    border-bottom: 1px solid gray;
+    min-width: 200px;
+}
+
+
+
+.key-value {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+}
+
+.project {}
+
+.group {}
+
+.status {
+    padding: 3px;
+    margin: 3px;
+}
+
+.title {
+    color: blue;
+}
+
+.description {
+
+    margin-bottom: 10px;
+    color: gray;
+}
+
+
+.hierarchical_level_0 {
+    margin-left: 0px;
+}
+
+.hierarchical_level_1 {
     margin-left: 20px;
 }
 
-.status{
-    display: inline-block;
-    border: 1px solid gray;
-    padding: 3px;
-}
-.title{
-    color: blue;
+.hierarchical_level_2 {
     margin-left: 40px;
 }
 
-.description{
-    margin-left: 80px;
-    margin-bottom: 10px;
-    color: gray;
+.hierarchical_level_3 {
+    margin-left: 60px;
 }
