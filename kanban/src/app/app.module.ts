@@ -6,11 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChecklistComponent } from './page/checklist/checklist.component';
+import { BoardComponent } from './page/board/board.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChecklistComponent
+    ChecklistComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,
