@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://localhost/kanban-back-laravel/kanban/public/api',
+    apiUrl: 'http://192.168.10.9/kanban-back-laravel/kanban/public/api',
 };
