@@ -8,13 +8,13 @@
   <div class="hierarchical_level_0">
     <Label>Projeto: </Label>
     <span contenteditable class="project"
-      (blur)="novo_card.project=get_element_text_by_event($event)">{{novo_card.project}}</span>
+      (blur)="novo_card.project=get_element_text_by_event($event)"></span>
   </div>
 
   <div class="hierarchical_level_1">
     <Label>Group: </Label>
     <span class="group" contenteditable
-      (blur)="novo_card.group=get_element_text_by_event($event)">{{novo_card.group}}</span>
+      (blur)="novo_card.group=get_element_text_by_event($event)"></span>
   </div>
 
   <div class="hierarchical_level_2">
@@ -26,7 +26,7 @@
     </select>
     <span class="title">
       <label for="">Title: </label>
-      <span contenteditable (blur)="novo_card.title=get_element_text_by_event($event)">{{novo_card.title}}</span>
+      <span contenteditable (blur)="novo_card.title=get_element_text_by_event($event)"></span>
     </span>
   </div>
 
@@ -45,7 +45,7 @@
   <div class="hierarchical_level_1 group" *ngIf="item.group_visible">{{item.group}}</div>
 
   <div class="hierarchical_level_2">
-    <select name="" id="" class="status" (change)="set_status_by_event_and_save($event, item)">
+    <select name="" id="name" class="status" (change)="set_status_by_event_and_save($event, item)">
       <option *ngFor="let opt of status_options" [value]="opt.key" [selected]="item.status==opt.key">
         {{opt.value}}
       </option>

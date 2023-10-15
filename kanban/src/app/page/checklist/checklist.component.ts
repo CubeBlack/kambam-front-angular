@@ -28,11 +28,11 @@ export class ChecklistComponent {
   };
 
   status_options = [
-    { value: 'To Do', key: 'to do' },
-    { value: 'In progress', key: 'In progress' },
-    { value: 'To test', key: 'to test' },
-    { value: 'Completed', key: 'completed' },
-    { value: 'Canceled', key: 'Canceled' },
+    { value: 'To Do',       key: 'to do' },
+    { value: 'In progress', key: 'in progress' },
+    { value: 'To test',     key: 'to test' },
+    { value: 'Completed',   key: 'completed' },
+    { value: 'Canceled',    key: 'canceled' },
   ];
 
   form_new_item_visible: boolean = false;
@@ -41,7 +41,6 @@ export class ChecklistComponent {
 
   ngOnInit(): void {
     this.getCards();
-
   }
 
   set_new_item_visible() {
@@ -54,8 +53,6 @@ export class ChecklistComponent {
 
   form_new_item_save() {
     this.set_new_item_hide();
-
-
 
     this.cardService.insertCard(this.novo_card)
       .subscribe((cards) => {
@@ -110,9 +107,11 @@ export class ChecklistComponent {
     }
   }
 
-  update_item(item: Item) {
+  update_item(item: Item, refresh:boolean=false) {
     this.cardService.updateCard(this.item_to_card(item)).subscribe(()=>{
-      //
+      if(refresh){
+        this.getCards();
+      }
     });
   }
 
@@ -123,11 +122,9 @@ export class ChecklistComponent {
   }
 
   get_element_value_by_event(event: Event):string{
-    const elemento = <Element>event.target;
-    const conteudo = elemento.nodeValue;
-
+    const elemento = <any>event.target;
+    const conteudo = elemento.value;
     return <string>conteudo;
-    
   }
 
   set_title_by_event_and_save(event: Event, item:Item):void{
@@ -142,6 +139,7 @@ export class ChecklistComponent {
 
   set_status_by_event_and_save(event: Event, item:Item){
     item.status = this.get_element_value_by_event(event);
-    this.update_item(item);
+    console.log(item.status);
+    this.update_item(item, true);
   }
 }
