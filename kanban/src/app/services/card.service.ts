@@ -4,11 +4,14 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { environment } from 'src/environments/environment.development'; 
+
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
-  private cards_api_url = 'http://localhost:8000/api/cards';
+  
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -16,22 +19,22 @@ export class CardService {
   constructor(private http: HttpClient) { }
 
   getCards(): Observable<Card[]> {
-    return this.http.get<Card[]>(this.cards_api_url)
+    return this.http.get<Card[]>(environment.apiUrl+'/cards')
       .pipe(
         catchError(this.handleError<Card[]>('getCards', []))
       );
   }
 
   getCard(id: number): Observable<Card> {
-    return this.http.get<Card>(this.cards_api_url + '/' + id)
+    return this.http.get<Card>(environment.apiUrl + '/cards/' + id)
   }
 
   insertCard(card: Card): Observable<Card> {
-    return this.http.post<Card>(this.cards_api_url, card);
+    return this.http.post<Card>(environment.apiUrl+'/cards', card);
   }
 
   updateCard(card:Card){
-    return this.http.put(this.cards_api_url+'/'+card.id, card, this.httpOptions).pipe(
+    return this.http.put(environment.apiUrl+'/cards/'+card.id, card, this.httpOptions).pipe(
       tap(_ => this.log(`updated card id=${card.id}`)),
       catchError(this.handleError<any>('updateCard'))
     );
