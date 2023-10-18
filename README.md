@@ -1,2 +1,2 @@
-# kambam-front-angular
-Front end for simples kamban
+# kamban-front-angular
+Front end for simples kanban
