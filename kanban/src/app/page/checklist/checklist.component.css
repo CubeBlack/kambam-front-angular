@@ -1,3 +1,8 @@
+.form_filter{
+    border: 1px solid gray;
+    margin: 5px;
+    padding: 5px;
+}
 .form_new_item {
     background-color: lightgreen;
     padding: 5px;

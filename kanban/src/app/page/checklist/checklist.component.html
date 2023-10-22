@@ -1,11 +1,32 @@
 <h1>Checklist</h1>
+
+<form class="form_filter">
+  <div>
+    <label for="input_filter_project">Project: </label>
+    <input type="text" [value]="filter_project" id="input_filter_project"
+    autocomplete="my project" (blur)="getCards()" 
+    >
+  </div>
+
+  <div >
+    <span *ngFor="let opt of status_options">
+      <label for="checkbox_{{opt.key}}">{{opt.value}}</label>
+      <input type="checkbox" name="{{opt.key}}" id="checkbox_{{opt.key}}" 
+      (change)="getCards()"      
+      [checked]="opt.onFilter">
+    </span>
+    
+  </div>
+  
+</form>
+
 <div class="options">
   <button *ngIf="!form_new_item_visible" (click)="set_new_item_visible()">Novo item</button>
 </div>
 
-<div *ngIf="form_new_item_visible" class="form_new_item">
+<form *ngIf="form_new_item_visible" class="form_new_item">
 
-  <div class="hierarchical_level_0">
+  <div class="hierarchical_level_0 ">
     <Label>Projeto: </Label>
     <span contenteditable class="project"
       (blur)="novo_card.project=get_element_text_by_event($event)"></span>
@@ -14,7 +35,9 @@
   <div class="hierarchical_level_1">
     <Label>Group: </Label>
     <span class="group" contenteditable
-      (blur)="novo_card.group=get_element_text_by_event($event)"></span>
+      (blur)="novo_card.group=get_element_text_by_event($event)"
+      id="new_item_group"
+      ></span>
   </div>
 
   <div class="hierarchical_level_2">
@@ -37,21 +60,24 @@
   </div>
 
   <button (click)="form_new_item_save()">Salvar</button>
-</div>
+</form>
 
-<div *ngFor="let item of itens;">
+<form *ngFor="let item of itens;" class="{{item}}">
   <div class="hierarchical_level_0 project" *ngIf="item.project_visible">{{item.project}}</div>
 
   <div class="hierarchical_level_1 group" *ngIf="item.group_visible">{{item.group}}</div>
 
   <div class="hierarchical_level_2">
-    <select name="" id="name" class="status" (change)="set_status_by_event_and_save($event, item)">
-      <option *ngFor="let opt of status_options" [value]="opt.key" [selected]="item.status==opt.key">
+    <select name="" id="name" class="status" (change)="set_status_by_event_and_save($event, item)"
+    id="item_group_{{item.id}}">
+      <option *ngFor="let opt of status_options" [value]="opt.key" [selected]="item.status==opt.key"
+      >
         {{opt.value}}
       </option>
     </select>
 
-    <span contenteditable class="title" (blur)="set_title_by_event_and_save($event, item)">{{item.title}}</span>
+    <span contenteditable class="title " 
+    (blur)="set_title_by_event_and_save($event, item)">{{item.title}}</span>
   </div>
   <div class="hierarchical_level_3 description" contenteditable (blur)="update_item(item)">{{item.description}}</div>
-</div>
+</form>

@@ -1,4 +1,4 @@
-import { group } from '@angular/animations';
+import { group, query } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Card } from 'src/app/mocks/mock-card';
 import { CardService } from 'src/app/services/card.service';
@@ -17,6 +17,7 @@ interface Item extends Card {
 export class ChecklistComponent {
   cards: Card[] = [];
   itens: Item[] = [];
+  filter_project:string = '';
 
   novo_card: Card = {
     project: '',
@@ -28,11 +29,11 @@ export class ChecklistComponent {
   };
 
   status_options = [
-    { value: 'To Do',       key: 'to do' },
-    { value: 'In progress', key: 'in progress' },
-    { value: 'To test',     key: 'to test' },
-    { value: 'Completed',   key: 'completed' },
-    { value: 'Canceled',    key: 'canceled' },
+    { value: 'To Do',       key: 'to do',       onFilter:true },
+    { value: 'In progress', key: 'in progress', onFilter:true },
+    { value: 'To test',     key: 'to test',     onFilter:true },
+    { value: 'Completed',   key: 'completed',   onFilter:false },
+    { value: 'Canceled',    key: 'canceled',    onFilter:false },
   ];
 
   form_new_item_visible: boolean = false;
@@ -61,7 +62,9 @@ export class ChecklistComponent {
   }
 
   getCards(): void {
-    this.cardService.getCards()
+    const query = this.make_query_by_filter();
+
+    this.cardService.getCards(query)
       .subscribe((cards) => {
         this.cards = cards;
         this.cards_to_itens();
@@ -141,5 +144,16 @@ export class ChecklistComponent {
     item.status = this.get_element_value_by_event(event);
     console.log(item.status);
     this.update_item(item, true);
+  }
+
+  make_query_by_filter():string{
+    let query:string ='';
+    
+    query += `project=${this.filter_project}&`;
+    for (let oIndex = 0; oIndex < this.status_options.length; oIndex++) {
+      const status = this.status_options[oIndex];
+      query += `${status.key}=${status.onFilter}&`;
+    }
+    return query;
   }
 }
