@@ -3,6 +3,7 @@
     margin: 5px;
     padding: 5px;
 }
+
 .form_new_item {
     background-color: lightgreen;
     padding: 5px;
@@ -24,6 +25,11 @@
     max-width: 250px;
 }
 
+.item{
+    display: block;
+    margin: 0;
+    padding: 5px;
+}
 .project {}
 
 .group {}
@@ -34,12 +40,10 @@
 }
 
 .title {
-    color: blue;
+    
 }
 
 .description {
-
-    margin-bottom: 10px;
     color: gray;
 }
 
@@ -58,4 +62,29 @@
 
 .hierarchical_level_3 {
     margin-left: 60px;
+}
+
+.item_todo{
+    background-color: lightblue;
+}
+
+.item_inprogress{
+    background-color: lightyellow;
+}
+
+.item_totest{
+    background-color: lightsalmon;
+}
+
+.item_completed{
+    background-color: lightcoral;
+}
+
+.item_canceled{
+    background-color: lightgray;
+}
+
+.item_erro{
+    border: 1px solid red;
+    background-color: gray;
 }

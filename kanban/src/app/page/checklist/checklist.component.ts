@@ -7,6 +7,7 @@ import { CardService } from 'src/app/services/card.service';
 interface Item extends Card {
   project_visible: boolean;
   group_visible: boolean;
+  style_class:string;
 }
 
 @Component({
@@ -29,11 +30,11 @@ export class ChecklistComponent {
   };
 
   status_options = [
-    { value: 'To Do',       key: 'to do',       onFilter:true },
-    { value: 'In progress', key: 'in progress', onFilter:true },
-    { value: 'To test',     key: 'to test',     onFilter:true },
-    { value: 'Completed',   key: 'completed',   onFilter:false },
-    { value: 'Canceled',    key: 'canceled',    onFilter:false },
+    { value: 'To Do',       key: 'to do',       onFilter:true, style_class:'item_todo' },
+    { value: 'In progress', key: 'in progress', onFilter:true, style_class:'item_inprogress' },
+    { value: 'To test',     key: 'to test',     onFilter:true, style_class:'item_totest' },
+    { value: 'Completed',   key: 'completed',   onFilter:false, style_class:'item_completed' },
+    { value: 'Canceled',    key: 'canceled',    onFilter:false, style_class:'item_canceled' },
   ];
 
   form_new_item_visible: boolean = false;
@@ -71,6 +72,17 @@ export class ChecklistComponent {
       });
   }
 
+  status_to_style_class(status:string):string{
+    for (let oIndex = 0; oIndex < this.status_options.length; oIndex++) {
+      const option_status = this.status_options[oIndex];
+      if(option_status.key == status){
+        return option_status.style_class;
+      }
+    }
+
+    return "item_erro";
+  }
+
   cards_to_itens(): void {
     let last_project: string = '';
     let last_group: string = '';
@@ -88,8 +100,11 @@ export class ChecklistComponent {
         'status': card.status,
         'title': card.title,
         'description': card.description,
-        'id': card.id
+        'id': card.id,
+        'style_class':this.status_to_style_class(card.status)
       };
+
+      console.log(item.style_class);
 
       last_project = card.project;
       last_group = card.group;

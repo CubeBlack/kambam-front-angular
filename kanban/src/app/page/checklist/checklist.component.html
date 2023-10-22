@@ -62,7 +62,7 @@
   <button (click)="form_new_item_save()">Salvar</button>
 </form>
 
-<form *ngFor="let item of itens;" class="{{item}}">
+<form *ngFor="let item of itens;" class="item {{item.style_class}}">
   <div class="hierarchical_level_0 project" *ngIf="item.project_visible">{{item.project}}</div>
 
   <div class="hierarchical_level_1 group" *ngIf="item.group_visible">{{item.group}}</div>
