@@ -3,7 +3,7 @@
 <form class="form_filter">
   <div>
     <label for="input_filter_project">Project: </label>
-    <input type="text" [value]="filter_project" id="input_filter_project"
+    <input name="input_filter_project" [(ngModel)]="filter_project" id="input_filter_project"
     autocomplete="my project" (blur)="getCards()" 
     >
   </div>

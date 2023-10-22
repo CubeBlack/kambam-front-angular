@@ -63,7 +63,7 @@ export class ChecklistComponent {
   }
 
   getCards(): void {
-    const query = this.make_query_by_filter();
+    let query = this.make_query_by_filter();
 
     this.cardService.getCards(query)
       .subscribe((cards) => {
